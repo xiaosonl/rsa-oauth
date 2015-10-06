@@ -1,6 +1,6 @@
 # RSAOAuth
 
-Node.js OAuth Library by RSA<br/>
+Node.js OAuth Library used RSA<br/>
 
 ## Example
 
@@ -16,6 +16,7 @@ console.log("The Token is " + oauth.getToken(token).isExpired);
 var tokenID = oauth.createTokenID(1235234);
 console.log("New TokenID: " + tokenID);
 console.log("The ID is " + oauth.getTokenID(tokenID));
+
 
 ## Installing
 
