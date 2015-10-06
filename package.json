@@ -1,7 +1,7 @@
 {
   "name": "rsa-oauth",
   "description": "oauth by rsa, for express",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xiaosonl/rsa-oauth.git"
@@ -16,7 +16,7 @@
     "name": "xiaosonl"
   },
   "license": "BSD",
-  "devDependencies": {
+  "dependencies": {
     "node-rsa": "0.2.25"
   }
 }

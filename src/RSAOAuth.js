@@ -12,6 +12,8 @@ module.exports = (function(){
     function RSAOAuth(options){
         this.options = options;
         this.key = new NodeRSA({b : 512});
+        this.loadPrivateKey();
+        this.loadPublicKey();
     }
 
     RSAOAuth.prototype.loadPublicKey = function(){
@@ -42,10 +44,10 @@ module.exports = (function(){
         console.log(private_key_data.toString());
     }
 
-    RSAOAuth.prototype.createToken = function (state) {
+    RSAOAuth.prototype.createToken = function (data) {
         var token = {
             createTime: new Date(),
-            state: state
+            data: data
         }
         if(this.options){
             token.expired = this.options.expired;
@@ -63,9 +65,9 @@ module.exports = (function(){
         if(tokenObj.isExpired){
             return null;
         }else{
-            return tokenObj.state.id;
+            return tokenObj.data.id;
         }
-    }
+    };
 
     RSAOAuth.prototype.getToken = function(token) {
         var tokenJson = this.key.decryptPublic(token, 'utf-8');
@@ -79,7 +81,36 @@ module.exports = (function(){
         }else{
             return null;
         }
-    }
+    };
+
+
+    RSAOAuth.prototype.express = function (callback, unAuthPaths){
+        var unAuthPaths = unAuthPaths;
+        var oauth = this;
+
+        return function(req, res, next){
+            var url = req.path;
+            if (unAuthPaths != undefined & unAuthPaths.indexOf(url) > -1) {
+                return next();
+            }
+
+            var token = req.query.token;
+            token = token.replace(/\s/g, '+');
+            var tokeObj;
+            try {
+                var tokenObj = oauth.getToken(token);
+            }catch(error){
+
+            }
+            if (tokenObj && !tokenObj.isExpired) {
+                req.token = tokenObj;
+                return next();
+            } else {
+                callback(req, res);
+                //res.send({ code: 403, error: "Token Error." });
+            }
+        }
+    };
 
     return RSAOAuth;
 })();
