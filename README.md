@@ -17,7 +17,6 @@ var tokenID = oauth.createTokenID(1235234);
 console.log("New TokenID: " + tokenID);
 console.log("The ID is " + oauth.getTokenID(tokenID));
 
-
 ## Installing
 
 ```shell
