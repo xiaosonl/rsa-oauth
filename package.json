@@ -1,4 +1,23 @@
 {
   "name": "rsa-oauth",
-  "version": "0.0.1"
+  "description": "oauth by rsa, for express",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaosonl/rsa-oauth.git"
+  },
+  "main":"src/RSAOAuth.js",
+  "keywords": [
+    "node",
+    "rsa",
+    "oauth"
+  ],
+  "author": {
+    "name": "xiaosonl"
+  },
+  "license": "BSD",
+  "devDependencies": {
+    "node-rsa": "0.2.25"
+  },
+  "readme": "ERROR: No README data found!"
 }
